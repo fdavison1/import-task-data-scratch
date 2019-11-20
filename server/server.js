@@ -19,6 +19,7 @@ app.use(express.json())
 app.get('/api/tasks', tc.getTasks)
 
 //PROJECTS
+app.put('/api/projects', tc.updateProjects)
 
 //listening---------------------------------------------------------------------
 massive(CONNECTION_STRING).then(databaseConnection => {

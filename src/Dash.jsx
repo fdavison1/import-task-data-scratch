@@ -37,6 +37,17 @@ export default class Dash extends React.Component {
                 })
             })
         }
+
+        updateProjects(newProject){
+            // console.log('fred')
+            axios.put('/api/projects', newProject)
+            .then(res => {
+                this.setState({
+                    projects: res.data
+                })
+            } )
+            this.getTasks()
+        }
     
         onDragEnd = result => {
             const {destination, source, draggableId } = result
@@ -67,18 +78,10 @@ export default class Dash extends React.Component {
                 ...project, 
                 taskIds: newTaskIds
             }
-            // console.log(newProject) // ----> good taskIds
+            this.updateProjects(newProject)
+            return console.log(newProject) // ----> good taskIds
 
-            // const newState = {
-            //     ...this.state,
-            //     projects: this.state.projects.splice(0, 1, newProject)
-            // }
-            // console.log(this.state.projects)
-            this.setState({
-                projects: [{...this.state.projects}]
-            })
-            // this.getTasks()
-            // console.log(this.state.projects)
+            
         }
 
 
@@ -96,7 +99,7 @@ export default class Dash extends React.Component {
                  <div>
                 {this.state.projects.map((projectId, index) =>  
                     {
-                    console.log(this.state.projects[index])
+                    // console.log(this.state.projects[index])
                     const project = this.state.projects[index]
                     // console.log(project)
                     const tasks = project.taskIds.map((taskId, index) => this.state.tasks[index])
