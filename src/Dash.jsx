@@ -1,6 +1,7 @@
 import React from 'react'
-import Project from './Project'
 import axios from 'axios'
+import { DragDropContext } from 'react-beautiful-dnd'
+import Project from './Project'
 
 export default class Dash extends React.Component {
     state = {
@@ -28,9 +29,11 @@ export default class Dash extends React.Component {
     }
 
 
+        componentDidMount(){
+            this.getTasks()
+        }
     
         getTasks(){
-            console.log('fred')
             axios.get('api/tasks')
             .then(res => {
                 // console.log(res.data)
@@ -40,7 +43,9 @@ export default class Dash extends React.Component {
             })
         }
     
-
+        onDragEnd = result => {
+            //
+        }
 
 
     render() {
@@ -49,14 +54,16 @@ export default class Dash extends React.Component {
 
 
         return (
-            <div>
+            <DragDropContext
+                onDragEnd={this.onDragEnd}
+            >
 
                
                  <div>
                 {this.state.projects.map((projectId, index) => 
                     {
                     const project = this.state.projects[index]
-                    console.log(project)
+                    // console.log(project.project_id)
                     const tasks = project.taskIds.map((taskId, index) => this.state.tasks[index])
 
 
@@ -75,7 +82,7 @@ export default class Dash extends React.Component {
                 </div> 
 
 
-            </div>
+            </DragDropContext>
         )
     }
 }
