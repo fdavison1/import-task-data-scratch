@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
-import Test from './Test'
+import Dash from './Dash'
 
 function App() {
   return (
     <div className="App">
-      <Test/>
+      <Dash/>
     </div>
   );
 }
