@@ -1,5 +1,6 @@
 import React from 'react'
 import Project from './Project'
+import axios from 'axios'
 
 export default class Dash extends React.Component {
     state = {
@@ -9,12 +10,12 @@ export default class Dash extends React.Component {
             '9': { id: '9', content: 'paint the fence' }
         },
         tasks: [
-            { task_id: 1, content: 'take out the trash' },
-            { task_id: 2, content: 'walk the cat' },
-            { task_id: 3, content: 'charge phone' },
-            { task_id: 4, content: 'cook dinner' },
-            { task_id: 5, content: 'wash the dishes' },
-            { task_id: 6, content: 'do laundry' }
+            { task_id: 1, content: 'test' },
+            { task_id: 2, content: 'test' },
+            { task_id: 3, content: 'test' },
+            { task_id: 4, content: 'test' },
+            { task_id: 5, content: 'test' },
+            { task_id: 6, content: 'test' }
         ],
         projects: [
             {
@@ -27,7 +28,18 @@ export default class Dash extends React.Component {
     }
 
 
-
+    
+        getTasks(){
+            console.log('fred')
+            axios.get('api/tasks')
+            .then(res => {
+                // console.log(res.data)
+                this.setState({
+                    tasks: res.data
+                })
+            })
+        }
+    
 
 
 
@@ -56,7 +68,9 @@ export default class Dash extends React.Component {
                     
                     )}
                 
-
+                        <button
+                        onClick={()=> this.getTasks()}
+                        >test</button>
 
                 </div> 
 
